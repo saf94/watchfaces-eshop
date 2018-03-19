@@ -5,4 +5,9 @@
     height: 35rem;
     color: white;
     background-color: rgb(233, 223, 223);
+    display: flex;
+}
+
+div {
+    border: 3px solid black;
 }
