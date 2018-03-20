@@ -3,7 +3,11 @@ import './index.css';
 
 const Faces = (props) => {
     return (
-        <div className="facesPanel"> <img src={props.img1}/> </div>
+        <div className="facesPanel">
+            <span onClick={props.scrollUp}><img src={props.upArrow} /></span>
+            <img src={props.img}/> 
+            <span onClick={props.scrollDown}><img src={props.downArrow} /></span>
+        </div>
     )
 }
  

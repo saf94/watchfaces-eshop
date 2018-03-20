@@ -1,5 +1,31 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Lato-Light;
+  background-color: rgb(35, 39, 43);
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./Assets/fonts/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Lato-Light";
+  src: url("./Assets/fonts/Lato-Light.ttf");
+}
+
+@font-face {
+  font-family: "Lato-Bold";
+  src: url("./Assets/fonts/Lato-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./Assets/fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Light";
+  src: url("./Assets/fonts/OpenSans-Light.ttf");
 }
