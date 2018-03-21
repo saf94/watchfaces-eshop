@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import './index.css';
+import "./index.css";
 import Faces from "../../Components/Faces";
 import Details from "../../Components/Details";
-
-const images = [
-    { img: 'images/img1.png', desc: "this watch is etc etc" },
-    { img: 'images/img2.png', desc: "this watch is etc etc" }
-]
+import data from "./data.json";
+import { Transition } from 'react-transition-group';
 
 const icons = {
     upArrow: "up-arrow.png",
@@ -25,30 +22,30 @@ class Home extends Component {
     componentDidMount() {
         this.setState(function (prevState, props) {
             return {
-                currentImage: images[prevState.currentImageCount].img
+                currentImage: data.selection[prevState.currentImageCount]
             }
         })
     }
 
     scrollUp() {
+        let count = this.state.currentImageCount - 1
         if (this.state.currentImageCount > 0) {
             this.setState(function (prevState, props) {
-                let count = prevState.currentImageCount - 1
                 return {
                     currentImageCount: count,
-                    currentImage: images[count].img
+                    currentImage: data.selection[count]
                 }
             })
         }
     }
 
     scrollDown() {
-        if (this.state.currentImageCount < images.length) {
+        let count = this.state.currentImageCount + 1
+        if (count < data.selection.length) {
             this.setState(function (prevState, props) {
-                let count = prevState.currentImageCount + 1
                 return {
                     currentImageCount: count,
-                    currentImage: images[count].img
+                    currentImage: data.selection[count]
                 }
             })
         }
@@ -58,8 +55,8 @@ class Home extends Component {
         console.log(this.state);
         return (
             <div className="mainSection">
-                <Details />
-                <Faces img={this.state.currentImage} upArrow={icons.upArrow} downArrow={icons.downArrow} scrollUp={() => this.scrollUp()} scrollDown={() => this.scrollDown()} />
+                <Details data={this.state.currentImage}/>
+                <Faces data={this.state.currentImage} upArrow={icons.upArrow} downArrow={icons.downArrow} scrollUp={() => this.scrollUp()} scrollDown={() => this.scrollDown()} />
             </div>
         )
     }
