@@ -3,26 +3,38 @@ import "./index.css";
 import Faces from "../../Components/Faces";
 import Details from "../../Components/Details";
 import data from "./data.json";
-import { Transition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 const icons = {
     upArrow: "up-arrow.png",
     downArrow: "down-arrow.png"
 }
 
+const Fade = ({ children, ...props }) => (
+    <CSSTransition
+        {...props}
+        timeout={500}
+        classNames="example"
+    >
+        {children}
+    </CSSTransition>
+);
+
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             currentImageCount: 0,
-            currentImage: ""
+            currentImage: "",
+            enterTransition: false
         }
     }
 
     componentDidMount() {
         this.setState(function (prevState, props) {
             return {
-                currentImage: data.selection[prevState.currentImageCount]
+                currentImage: data.selection[prevState.currentImageCount],
+                enterTransition: true
             }
         })
     }
@@ -45,7 +57,7 @@ class Home extends Component {
             this.setState(function (prevState, props) {
                 return {
                     currentImageCount: count,
-                    currentImage: data.selection[count]
+                    currentImage: data.selection[count],
                 }
             })
         }
@@ -54,9 +66,15 @@ class Home extends Component {
     render() {
         console.log(this.state);
         return (
-            <div className="mainSection">
-                <Details data={this.state.currentImage}/>
-                <Faces data={this.state.currentImage} upArrow={icons.upArrow} downArrow={icons.downArrow} scrollUp={() => this.scrollUp()} scrollDown={() => this.scrollDown()} />
+            <div>
+                <div className="mainSection">
+                    <Fade in={this.state.enterTransition}>
+                        <div className="innerContainer">
+                            <Details data={this.state.currentImage} />
+                            <Faces data={this.state.currentImage} upArrow={icons.upArrow} downArrow={icons.downArrow} scrollUp={() => this.scrollUp()} scrollDown={() => this.scrollDown()} />
+                        </div>
+                    </Fade>
+                </div>
             </div>
         )
     }
